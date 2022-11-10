@@ -10,9 +10,14 @@
     <title>Geolocation Sample</title>
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/style_layout.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
     {% endblock %}
 </head>
 
@@ -21,25 +26,24 @@
     <label for="exampleInputEmail1" class="form-label-title"></label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
         placeholder="ToDoの題名を入力してください。 例）今年中にやりたいこと" style="background-color:#eff0f3;">
+    <select class="form-select form-select-lg mb-3 box_size_select" aria-label=".form-select-lg example" id="box">
+        <option selected value="3">3×3</option>
+        <option value="5">5×5</option>
+        <option value="7">7×7</option>
+    </select>
 </div>
 
-{% set b = 9 %}
+<script>
+    const select = document.querySelector('select');
+    //セレクトボックスの変更でイベント発火
+    select.addEventListener('change', () => {
+        console.log(select)
+    }, false);
+</script>
 
-{% set a = namespace(cnt=0) %}
-<div class="block">
-    {% for n in range(3) %}
-    <div>
-        <div class="block_floor">
-            {% for m in range(3) %}
-            <div>
-                <div class="box">
-                    <input id='input_box' type='text'>
-                </div>
-            </div>
-            {% set a.cnt = a.cnt + 1 %}
-            {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
+
+<div id="wrap">
+    <script src="static/js/box.js"></script>
 </div>
+
 {% endblock %}

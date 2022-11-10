@@ -17,6 +17,9 @@
     margin:0.3vw;
 }
 
+.wrap{
+    width:80vw;
+}
 
 #input_box {
     display: block;
@@ -24,5 +27,14 @@
     height: 100%;
     border: none;
     border-radius:1vw;
-    background: #eff0f3;;
-  }
+    background: #eff0f3;
+    text-align:center;
+    color:#6246ea;
+    font-size:2vw;
+}
+
+.box_size_select{
+    height:100%;
+    margin-bottom:0px;
+
+}
