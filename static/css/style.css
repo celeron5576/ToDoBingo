@@ -17,6 +17,14 @@
     margin:0.3vw;
 }
 
+.inputtedbox{
+    width: 15vw;
+    height:15vw;
+    border-radius:1vw;
+    border:solid 1px #6246ea;
+    margin:0.3vw;
+}
+
 .wrap{
     width:80vw;
 }
