@@ -75,6 +75,7 @@ function valueChange() {
             console.log(this.value);
             if (this.value != "") {
                 inputted_box = '<div class="inputtedbox">'
+                + '<i class="fa-solid fa-pen" id="edit_'+ this.id +'"></i>'
                 + '<p>'+this.value+'</p>'
                 + '</div>'
                 console.log(inputted_box)
@@ -94,12 +95,22 @@ for (let x = 0; x < box_num * box_num; x++) {
     box_ids[x] = box_id_num;
 }
 
+
 //配列に入っているid名を使い、値が入った時の処理をする
 for (var i = 0; i < box_num * box_num; i++) {
     let boxInput = document.getElementById(box_ids[i])
     boxInput.addEventListener('change', function () {
         if (this.value != "") {
-            console.log(this.value)
+            inputted_box = '<div class="inputtedbox">'
+            + '<button onclick="(function(){ var val='+ this.id +';edit(val);})();"><i class="fa-solid fa-pen" id="edit_'+ this.id +'"></i></button>'
+            + '<p>'+this.value+'</p>'
+            + '</div>'
+            console.log(inputted_box)
+            document.getElementById("box_"+this.id).innerHTML = inputted_box;
+            console.log(this)
         }
     });
+    function edit(id){
+        console.log(id)
+    }
 }
