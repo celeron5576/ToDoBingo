@@ -102,7 +102,7 @@ for (var i = 0; i < box_num * box_num; i++) {
     boxInput.addEventListener('change', function () {
         if (this.value != "") {
             inputted_box = '<div class="inputtedbox">'
-            + '<button onclick="(function(){ var val='+ this.id +';edit(val);})();"><i class="fa-solid fa-pen" id="edit_'+ this.id +'"></i></button>'
+            + '<button onclick="buttonClick("'+this.id+'")"><i class="fa-solid fa-pen edit_btn" id="edit_'+ this.id +'"></i></button>'
             + '<p>'+this.value+'</p>'
             + '</div>'
             console.log(inputted_box)
@@ -113,4 +113,8 @@ for (var i = 0; i < box_num * box_num; i++) {
     function edit(id){
         console.log(id)
     }
+}
+
+function buttonClick(a){
+    alert(a);
 }
