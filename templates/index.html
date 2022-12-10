@@ -21,30 +21,74 @@
         crossorigin="anonymous"></script>
     {% endblock %}
 </head>
+<div id="main" class="main">
+    <div class="print_hide">
+        {% block main %}
+        <div class="title print_hide">
+            <label for="exampleInputEmail1" class="form-label-title"></label>
+            <input type="text" name="form_title" class="form-control" id="InputTitle" aria-describedby="emailHelp"
+                placeholder="ToDoの題名を入力してください。 例）今年中にやりたいこと" style="background-color:#eff0f3;" value="">
+            <select class="form-select form-select-lg mb-3 box_size_select" aria-label=".form-select-lg example"
+                id="box">
+                <option selected value="3">3×3</option>
+                <option value="5">5×5</option>
+                <option value="7">7×7</option>
+            </select>
+        </div>
+    </div>
+    <div id="title" class="print_block">
+        <h1>No Title</h1>
+    </div>
 
-{% block main %}
-<div class="title">
-    <label for="exampleInputEmail1" class="form-label-title"></label>
-    <input type="text" name="form_title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-        placeholder="ToDoの題名を入力してください。 例）今年中にやりたいこと" style="background-color:#eff0f3;">
-    <select class="form-select form-select-lg mb-3 box_size_select" aria-label=".form-select-lg example" id="box">
-        <option selected value="3">3×3</option>
-        <option value="5">5×5</option>
-        <option value="7">7×7</option>
-    </select>
+    <script>
+        let input = document.getElementById('InputTitle');
+        input.addEventListener('change', TitleChange);
+        function TitleChange() {
+            var title = '<h1>' + input.value + '</h1>'
+            document.getElementById('title').innerHTML = title;
+        }
+        const select = document.querySelector('select');
+        //セレクトボックスの変更でイベント発火
+        select.addEventListener('change', () => {
+            console.log(select)
+        }, false);
+    </script>
+
+    <div id="wrap">
+        <script src="static/js/box.js"></script>
+    </div>
+
+    <button type="button" id="print_btn" class="btn btn-outline-info print_hide" onclick="prints()">印刷する</button>
+    <button type="button" id="prtsc_btn" class="btn btn-outline-info print_hide" onclick="prtsc()">画像を保存</button>
+    <p id="my_link">https://www.hogehogehoge.com</p>
+
+    <script>
+        function prints() {
+            console.log("a");
+            window.print();
+        }
+        function prtsc() {
+            alert("スクリーンショット用ページを表示します。\n表をタップすると元のページに戻ります。")
+            var child_add_class = document.getElementById("title");
+            console.log(child_add_class)
+            var parent_add_class = child_add_class.parentElement;
+            parent_add_class.classList.add("all_btn");
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'static/css/style_prtsc.css';
+            document.head.appendChild(link);
+
+
+            document.getElementById('wrap').addEventListener('click', function () {
+                var linkElements = document.getElementsByTagName('link');
+                for (var i = 0; i < linkElements.length; i++) {
+                    var linkElement = linkElements[i];
+                    if (linkElement.getAttribute('href') === 'static/css/style_prtsc.css') {
+                        linkElement.parentNode.removeChild(linkElement);
+                    }
+                }
+            });
+        }
+    </script>
+    {% endblock %}
 </div>
-
-<script>
-    const select = document.querySelector('select');
-    //セレクトボックスの変更でイベント発火
-    select.addEventListener('change', () => {
-        console.log(select)
-    }, false);
-</script>
-
-
-<div id="wrap">
-    <script src="static/js/box.js"></script>
-</div>
-
-{% endblock %}

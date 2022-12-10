@@ -10,23 +10,23 @@
 }
 
 .box{
-    width: 15vw;
-    height:15vw;
-    border-radius:1vw;
+    width: 20vh;
+    height:20vh;
+    border-radius:1vh;
     border:solid 1px #6246ea;
-    margin:0.3vw;
+    margin:0.3vh;
 }
 
 .inputtedbox{
-    width: 15vw;
-    height:15vw;
-    border-radius:1vw;
+    width: 20vh;
+    height:20vh;
+    border-radius:1vh;
     border:solid 1px #6246ea;
-    margin:0.3vw;
+    margin:0.3vh;
 }
 
 .wrap{
-    width:80vw;
+    height: 60vh;
 }
 
 .input_box {
@@ -34,15 +34,48 @@
     width: 100%;
     height: 100%;
     border: none;
-    border-radius:1vw;
+    border-radius: 1vw;
     background: #eff0f3;
-    text-align:center;
-    color:#6246ea;
-    font-size:2vw;
+    text-align: center;
+    color: #6246ea;
+    font-size: 1.8vh;
 }
 
 .box_size_select{
-    height:100%;
-    margin-bottom:0px;
+    height: 100%;
+    margin-bottom: 0px;
+    background-color: #eff0f3;
+}
 
+.print_block{
+    display: none;
+}
+
+.main{
+    position: relative;
+}
+
+#my_link{
+    position: absolute;
+    color: #6246ea;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    bottom: 2.4vw;
+}
+
+#print_btn{
+    margin: 3vh 0;
+}
+
+@media print{
+    .print_block{
+        display: block;
+        color: #6246ea;
+        margin: 5vh 0;
+    }
+    .print_hide{
+        display: none;
+    }
 }

@@ -66,8 +66,8 @@ function valueChange() {
         console.log(box_id_num);
         box_ids[x] = box_id_num;
     }
-    
-    
+
+
     for (var i = 0; i < box_num * box_num; i++) {
         let boxInput = document.getElementById(box_ids[i])
         boxInput.addEventListener('change', function () {
@@ -75,11 +75,11 @@ function valueChange() {
             console.log(this.value);
             if (this.value != "") {
                 inputted_box = '<div class="inputtedbox">'
-                + '<i class="fa-solid fa-pen" id="edit_'+ this.id +'"></i>'
-                + '<p>'+this.value+'</p>'
-                + '</div>'
+                    + '<i class="fa-solid fa-pen" id="edit_' + this.id + '" class="print_hide"></i>'
+                    + '<p>' + this.value + '</p>'
+                    + '</div>'
                 console.log(inputted_box)
-                document.getElementById("box_"+this.id).innerHTML = inputted_box;
+                document.getElementById("box_" + this.id).innerHTML = inputted_box;
                 console.log(this)
             }
         });
@@ -97,24 +97,28 @@ for (let x = 0; x < box_num * box_num; x++) {
 
 
 //配列に入っているid名を使い、値が入った時の処理をする
+//for文で動的にIDを生成、動的に生成したIDとchangeを使って状態が変わったらHTMLを書き換えてテキスト状態にする
 for (var i = 0; i < box_num * box_num; i++) {
     let boxInput = document.getElementById(box_ids[i])
     boxInput.addEventListener('change', function () {
         if (this.value != "") {
             inputted_box = '<div class="inputtedbox">'
-            + '<button onclick="buttonClick("'+this.id+'")"><i class="fa-solid fa-pen edit_btn" id="edit_'+ this.id +'"></i></button>'
-            + '<p>'+this.value+'</p>'
-            + '</div>'
+                + '<button type="button" value="' + this.id + '" onclick="buttonClick(this.value)" class="print_hide"><i class="fa-solid fa-pen edit_btn" id="edit_' + this.id + '"></i></button>'
+                + '<p>' + this.value + '</p>'
+                + '</div>'
             console.log(inputted_box)
-            document.getElementById("box_"+this.id).innerHTML = inputted_box;
+            document.getElementById("box_" + this.id).innerHTML = inputted_box;
             console.log(this)
         }
     });
-    function edit(id){
-        console.log(id)
-    }
 }
 
-function buttonClick(a){
-    alert(a);
+function buttonClick(id) {
+    console.log(id)
+    edit_box = '<div class="box">'
+        + '<input id="' + id + '" class="input_box" name="input_box" type="text" value="" placeholder="ToDoを入力">'
+        + '</div>'
+    console.log(edit_box);
+    document.getElementById("box_" + id).innerHTML = edit_box;
+    console.log(this);
 }

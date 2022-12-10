@@ -1,0 +1,8 @@
+.print_block{
+    display: block !important;
+    color: #6246ea;
+    margin: 5vh 0;
+}
+.print_hide{
+    display: none !important;
+}
