@@ -6,3 +6,12 @@
 .print_hide{
     display: none !important;
 }
+
+.box{
+    display: grid !important;
+}
+
+.inputted_text{
+    justify-content: center !important;
+    align-items: center !important;
+}

@@ -3,7 +3,7 @@ box_ids = []
 //id名を動的に生成して配列に追加
 for (let x = 0; x < box_num * box_num; x++) {
     var box_id_num = "input_box" + x;
-    console.log(box_id_num);
+    //console.log(box_id_num);
     box_ids[x] = box_id_num;
 }
 
@@ -21,9 +21,12 @@ for (let n = 0; n < box_num; n++) {
     box += '<div class="block_floor">'
     for (let m = 0; m < box_num; m++) {
         box += '<div id="box_input_box' + (n * box_num + m) + '" class="input_box_out">'
-        box += '<div class="box">'
+        box += '<div class="box" id="box_' + (n * box_num + m) + '">'
         if (n * box_num + m + 1 == (box_num * box_num - 1) / 2 + 1) {
-            box += '<input id="input_box' + (n * box_num + m) + '" class="input_box" name="input_box" type="text" value="FREE" placeholder="ToDoを入力">'
+            box += '<button type="button" id="FREE" value="input_box' + (n * box_num + m) + '" class="print_hide inputted_box inputted" onclick="buttonClick(this.value ,this.id)">'
+                + '<i class="fa-solid fa-pen edit_btn inputted" id="edit_' + (n * box_num + m) + '"></i>'
+                + '</button>'
+                + '<p class="inputted_text">FREE</p>'
         } else {
             box += '<input id="input_box' + (n * box_num + m) + '" class="input_box" name="input_box" type="text" placeholder="ToDoを入力">'
         }
@@ -37,6 +40,32 @@ for (let n = 0; n < box_num; n++) {
 document.getElementById('wrap').innerHTML = box;
 
 
+function ChangeFontsize() {
+    //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    var parent = document.getElementById('box_0');
+    var parentWidth = parent.offsetWidth;
+    var inputted_texts = document.getElementsByClassName('inputted_text');
+    //console.log(inputted_texts)
+    //console.log(inputted_texts.length)
+    var pens = document.getElementsByClassName('fa-pen');
+    var input_boxes = document.getElementsByClassName("input_box");
+    console.log("サイズ変更入りまーーーーす");
+    for (let i = 0; i < inputted_texts.length; i++) {
+        let inputted_text = inputted_texts[i];
+        let pen = pens[i];
+        //console.log(inputted_text);
+        inputted_text.style.fontSize = `${parentWidth / 9}px`;
+        pen.style.fontSize = `${parentWidth / 12}px`;
+        //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
+    console.log(input_boxes)
+    for (let i = 0; i < input_boxes.length; i++) {
+        let input_box = input_boxes[i]
+        input_box.style.fontSize = `${parentWidth / 8}px`;
+    }
+}
+
 //セレクトボックスで変更したときにボックスサイズを変更するプログラム
 function valueChange() {
     var box_num = boxSelect.value
@@ -46,9 +75,12 @@ function valueChange() {
         box += '<div class="block_floor">'
         for (let m = 0; m < box_num; m++) {
             box += '<div id="box_input_box' + (n * box_num + m) + '" class="input_box_out">'
-            box += '<div class="box">'
+            box += '<div class="box" id="box_' + (n * box_num + m) + '">'
             if (n * box_num + m + 1 == (box_num * box_num - 1) / 2 + 1) {
-                box += '<input id="input_box' + (n * box_num + m) + '" class="input_box" name="input_box" type="text" value="FREE" placeholder="ToDoを入力">'
+                box += '<button type="button" id="FREE" value="input_box' + (n * box_num + m) + '" class="print_hide inputted_box inputted" onclick="buttonClick(this.value ,this.id)">'
+                    + '<i class="fa-solid fa-pen edit_btn inputted" id="edit_' + (n * box_num + m) + '"></i>'
+                    + '</button>'
+                    + '<p class="inputted_text">FREE</p>'
             } else {
                 box += '<input id="input_box' + (n * box_num + m) + '" class="input_box" name="input_box" type="text" placeholder="ToDoを入力">'
             }
@@ -60,6 +92,7 @@ function valueChange() {
     }
     + '</div>';
     document.getElementById('wrap').innerHTML = box;
+    change_observer();
 }
 let boxSelect = document.getElementById('box');
 boxSelect.addEventListener('change', valueChange);
@@ -68,7 +101,7 @@ boxSelect.addEventListener('change', valueChange);
 //boxidを配列に保管するプログラム
 for (let x = 0; x < box_num * box_num; x++) {
     var box_id_num = "input_box" + x;
-    console.log(box_id_num);
+    //console.log(box_id_num);
     box_ids[x] = box_id_num;
 }
 
@@ -76,53 +109,55 @@ for (let x = 0; x < box_num * box_num; x++) {
 //id名を動的に生成して配列に追加
 for (let x = 0; x < box_num * box_num; x++) {
     var box_id_num = "input_box" + x;
-    console.log(box_id_num);
+    //console.log(box_id_num);
     box_ids[x] = box_id_num;
 }
 
 //配列に入っているid名を使い、値が入った時の処理をする
 //for文で動的にIDを生成、動的に生成したIDとchangeを使って状態が変わったらHTMLを書き換えてテキスト状態にする
 for (var i = 0; i < box_num * box_num; i++) {
-    let boxInput = document.getElementById(box_ids[i])
-    boxInput.addEventListener('change', function () {
-        if (this.value != "") {
-            console.log("//////////////////////////////////////////////////")
-            console.log(this.value)
-            console.log(this.id)
-            inputted_box = '<div class="box">'
-                + '<button type="button" value="' + this.id + '"class="' + this.value + '" onclick="buttonClick(this.value ,this.className)" class="print_hide inputted_box inputted">'
-                + '<i class="fa-solid fa-pen edit_btn" id="edit_' + this.id + '"></i>'
-                + '</button>'
-                + '<p>' + this.value + '</p>'
-                + '</div>'
-            console.log(inputted_box)
-            document.getElementById("box_" + this.id).innerHTML = inputted_box;
-            console.log(this)
-        }
-    });
+    let boxInput = document.getElementById(box_ids[i]);
+    //console.log(boxInput);
+    if (i != (box_num * box_num - 1) / 2) {
+        boxInput.addEventListener('change', function () {
+            if (this.value != "") {
+                //console.log("//////////////////////////////////////////////////");
+                //console.log(this.value);
+                //console.log(this.id);
+                var lastChar = this.id.slice(9, this.id.length);
+                inputted_box = '<div class="box" id="box_' + lastChar + '">'
+                    + '<button type="button" id="' + this.value + '" value="' + this.id + '" class="print_hide inputted_box inputted" onclick="buttonClick(this.value ,this.id)">'
+                    + '<i class="fa-solid fa-pen edit_btn inputted" id="edit_' + this.id + '"></i>'
+                    + '</button>'
+                    + '<p class="inputted_text">' + this.value + '</p>'
+                    + '</div>'
+                //console.log(inputted_box);
+                document.getElementById("box_" + this.id).innerHTML = inputted_box;
+                //console.log(this);
+            }
+        });
+    }
 }
 
 function buttonClick(id, value) {
-    console.log(id)
-    console.log(value)
-    edit_box = '<div class="box">'
+    //console.log(id)
+    //console.log(value)
+    //console.log(inputted_box)
+    var lastChar = id.slice(9, id.length);
+    edit_box = '<div class="box" id="box_' + lastChar + '">'
         + '<input id="' + id + '" class="input_box" name="input_box" type="text" value="' + value + '" placeholder="ToDoを入力">'
         + '</div>'
-    console.log(edit_box);
+    //console.log(edit_box);
     document.getElementById("box_" + id).innerHTML = edit_box;
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(this);
-    console.log(this.value)
+    //console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    //console.log(this);
+    //console.log(this.value)
 
 
 
     var inputChange = document.getElementsByClassName('input_box');
-    console.log(inputChange)
-    //inputChange.addEventListener('change', input_change);
-
-    for (var i = 0; i < inputChange.length; i++) {
-        inputChange[i].addEventListener("change", input_change);
-    }
+    //console.log(inputChange)
+    change_observer();
 }
 
 
@@ -130,31 +165,38 @@ function buttonClick(id, value) {
 
 function input_change() {
     for (var i = 0; i < box_num * box_num; i++) {
-        let boxInput = document.getElementById(box_ids[i])
+        //let boxInput = document.getElementById(box_ids[i]);
         //boxInput.addEventListener('change', function () {
-        console.log(this.id);
-        console.log(this.value);
+        console.log(`id:${this.id}`);
+        console.log(`value:${this.value}`);
+        var lastChar = this.id.slice(9, this.id.length);
         if (this.value != "") {
-            inputted_box = '<div class="box">'
-                + '<div class="input_box">'
-                + '<i class="fa-solid fa-pen" id="edit_' + this.id + '" class="print_hide"></i>'
-                + '<p>' + this.value + '</p>'
-                + '</div>'
-                + '</div>'
-            console.log("a")
-            console.log(inputted_box)
-            document.getElementById("box").innerHTML = inputted_box;
-            console.log(this)
+            inputted_box = '<button type="button" id="' + this.value + '" value="' + this.id + '" class="print_hide inputted_box inputted" onclick="buttonClick(this.value ,this.id)">'
+                + '<i class="fa-solid fa-pen inputted" id="edit_' + this.id + '" class="print_hide"></i>'
+                + '</button>'
+                + '<p class="inputted_text">' + this.value + '</p>'
+
+            console.log("a");
+            console.log(inputted_box);
+            console.log(`数：${lastChar}`)
+            console.log(`box_${lastChar}`)
+            console.log(document.getElementById(`box_${lastChar}`))
+            document.getElementById(`box_${lastChar}`).innerHTML = inputted_box;
+            console.log(this);
         }
         //});
     }
+    ChangeFontsize();
 }
+
 var inputChange = document.getElementsByClassName('input_box');
-console.log(inputChange)
-//inputChange.addEventListener('change', input_change);
 
-
-
-for (var i = 0; i < inputChange.length; i++) {
-    inputChange[i].addEventListener("change", input_change);
+function change_observer() {
+    ChangeFontsize();
+    for (var i = 0; i < inputChange.length; i++) {
+        inputChange[i].addEventListener("change", input_change);
+        inputChange[i].addEventListener("change", ChangeFontsize);
+    }
 }
+
+change_observer();

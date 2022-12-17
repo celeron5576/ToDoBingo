@@ -9,8 +9,8 @@
     <meta charset="UTF-8">
     <title>ToDo_Bingo</title>
     <script src="https://kit.fontawesome.com/8ba28bca2a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="static/css/style.css">
-    <link rel="stylesheet" href="static/css/style_layout.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style_btn.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -26,7 +26,7 @@
         {% block main %}
         <div class="title print_hide">
             <label for="exampleInputEmail1" class="form-label-title"></label>
-            <input type="text" name="form_title" class="form-control" id="InputTitle" aria-describedby="emailHelp"
+            <input type="text" name="form_title" class="form-control input_title" id="InputTitle" aria-describedby="emailHelp"
                 placeholder="ToDoの題名を入力してください。 例）今年中にやりたいこと" style="background-color:#eff0f3;" value="">
             <select class="form-select box_size" aria-label="Default select example" id="box">
                 <option selected value="3">3×3</option>
@@ -54,11 +54,11 @@
     </script>
 
     <div id="wrap">
-        <script src="static/js/box.js"></script>
+        <script src="../static/js/box.js"></script>
     </div>
 
-    <button type="button" id="print_btn" class="btn btn-outline-info print_hide" onclick="prints()">印刷する</button>
-    <button type="button" id="prtsc_btn" class="btn btn-outline-info print_hide" onclick="prtsc()">画像を保存</button>
+    <button type="button" id="print_btn" class="btn-outline-inf print_hide" onclick="prints()">印刷する</button>
+    <button type="button" id="prtsc_btn" class="btn-outline-inf print_hide" onclick="prtsc()">画像を保存</button>
     <p id="my_link" class="print_block">https://www.hogehogehoge.com</p>
 
     <script>
@@ -90,4 +90,5 @@
         }
     </script>
     {% endblock %}
+    <script src="../static/js/font-size.js"></script>
 </div>

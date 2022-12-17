@@ -1,5 +1,9 @@
 .navbar{
-    height: 60px;
+    height: 6vh;
+}
+
+.navbar-brand {
+    font-size: 2.5vh !important;
 }
 
 .block_floor{
@@ -10,21 +14,41 @@
 .title{
     display: inline-flex;
     width:40vw;
-    margin:2vw;
+    height: 5vh;
+    margin: 1.5vh 0;
 }
 
+.input_title {
+    height: 4vh !important;
+}
+
+.box_size{
+    height: 4vh !important;
+}
+
+
+
 .box{
+    display: grid;
     border-radius:1vh;
     border:solid 1px #6246ea;
     margin:0.3vh;
     height: 100%;
+    width: 100%;
 }
 
 .inputted{
-    width: 20.85vh;
+    width: 100%;
     outline: none;
     border: none;
     background: transparent;
+    color: #6246ea;
+    display: grid;
+}
+
+.inputted i {
+    padding-top: 0.75vh;
+    align-items: start;
 }
 
 .inputtedbox{
@@ -33,24 +57,20 @@
     display: block;
     width: 100%;
     height: 100%;
-    border-radius: 1vw;
+    border-radius: 1vh;
     background: #eff0f3;
-    text-align: center;
     color: #6246ea;
-    font-size: 1.8vh;
+    font-size: 150%;
 }
 
 #wrap{
-    position: relative;
-    height: 70vh;
-    width: 70vh;
-    left: 50%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 0px;
 }
 
 .block{
-    position: absolute;
-    left: 50%;
-    transform: translate(-100%);
     height: 70vh;
     width: 70vh;
 }
@@ -60,19 +80,22 @@
     width: 100%;
     height: 100%;
     border: none;
-    border-radius: 1vw;
+    border-radius: 1vh;
     background: #eff0f3;
     text-align: center;
     color: #6246ea;
-    font-size: 1.8vh;
+    font-size: 150%;
 }
 
 .input_box_out {
     height: 100%;
+    width: 30%;
+    margin: 0.3vh;
 }
 
 .block_floor{
     height: 100%;
+    width: 100%;
 }
 
 .box_size_select{
@@ -132,6 +155,37 @@ select{
     height: 13%;
     margin: 0.6vh;
 }
+
+.inputted_text{
+    height: 3vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-primary {
+    background: #eff0f3;
+    color: #6246ea;
+}
+
+.btn-primary:hover, .btn-primary:focus, 
+.btn-primary:active, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:active.focus,
+.btn-primary.active, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary, 
+.open > .dropdown-toggle.btn-primary:hover,
+.open > .dropdown-toggle.btn-primary:focus, 
+.open > .dropdown-toggle.btn-primary.focus,
+.btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus {
+    background: #eff0f3;
+    color: #6246ea;
+}
+
+.btn-primary.outline {
+    border: 3px solid #6246ea;
+    color: #6246ea;
+}
+
 
 @media print{
     .print_block{
