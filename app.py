@@ -175,8 +175,9 @@ def keep():
 ###################################################################################
 @app.route("/keep_ToDo" ,methods=["GET" ,"POST"])
 def keep_todo():
-    a = request.form["title"]
+    a = request.form["box_title"]
     b = request.form["box_value0"]
+    b = request.form["box_value5"]
     print(a)
     print(b)
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")

@@ -14,8 +14,8 @@ for (let x = 0; x < box_num * box_num; x++) {
 
 
 
-submit_value = '<input id="input_box_value-2" class="input_box hide"type="text" value="9" name="box_size">'
-submit_value += '<input id="input_box_title" class="input_box hide"type="text" name="box_title">'
+submit_value = '<input id="input_box_value-2" class="input_box hide" type="text" value="9" name="box_size">'
+submit_value += '<input id="input_box_title" class="input_box hide" type="text" name="box_title">'
 
 for (let x = 0; x < 9; x++) {
     if (x != 5) {
