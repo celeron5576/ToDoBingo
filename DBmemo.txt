@@ -5,8 +5,8 @@
 # username: ユーザー名
 con.execute(
     """CREATE TABLE Users(
-        ID INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
-        email STRING NOT NULL, 
+        ID INTEGER AUTOINCREMENT PRIMARY KEY,
+        email STRING, 
         password STRING NOT NULL,
         username STRING
         );
