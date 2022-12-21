@@ -16,6 +16,7 @@ con = sqlite3.connect('TestDB.db')
 
 
 
+
 def apology(message, code=400):
     """Render message as an apology to user."""
     def escape(s):

@@ -5,7 +5,7 @@
 # username: ユーザー名
 con.execute(
     """CREATE TABLE Users(
-        ID INTEGER AUTOINCREMENT PRIMARY KEY,
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
         email STRING, 
         password STRING NOT NULL,
         username STRING
@@ -21,7 +21,7 @@ con.execute(
 # like_num: いいね数
 con.execute(
     """CREATE TABLE ToDos(
-        ID INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL, 
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
         title STRING, 
         description STRING, 
         date INTEGER,
@@ -39,7 +39,7 @@ con.execute(
 # like_num: いいね数
 con.execute(
     """CREATE TABLE Released_ToDos(
-        ID INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL, 
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
         title STRING, 
         description STRING, 
         date INTEGER,
@@ -52,7 +52,7 @@ con.execute(
 #いいねテーブル
 con.execute(
     """CREATE TABLE likes(
-        ID INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL, 
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
         contribution_id INTEGER,
         user_id STRING,
         date INTEGER
