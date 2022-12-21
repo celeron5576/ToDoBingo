@@ -1,5 +1,4 @@
-from flask import Flask,render_template, flash, redirect, request, session
-from flask import Flask, redirect, url_for, render_template, request, session 
+from flask import Flask,render_template, flash, redirect, url_for, request, session
 from flask_session import Session
 from datetime import timedelta 
 
@@ -176,6 +175,11 @@ def keep():
 ###################################################################################
 @app.route("/keep_ToDo" ,methods=["GET" ,"POST"])
 def keep_todo():
+    a = request.form["title"]
+    b = request.form["box_value0"]
+    print(a)
+    print(b)
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     return redirect("/")
 
 

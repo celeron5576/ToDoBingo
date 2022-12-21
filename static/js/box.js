@@ -13,6 +13,23 @@ for (let x = 0; x < box_num * box_num; x++) {
 
 
 
+
+submit_value = '<input id="input_box_value-2" class="input_box hide"type="text" value="9" name="box_size">'
+submit_value += '<input id="input_box_title" class="input_box hide"type="text" name="box_title">'
+
+for (let x = 0; x < 9; x++) {
+    if (x != 5) {
+        submit_value += '<input id="input_box_value' + x + '" class="input_box hide"type="text" name="box_value' + x + '">'
+    }else{
+        submit_value += '<input id="input_box_value' + x + '" class="input_box hide"type="text" value="free" name="box_value5">'
+    }
+}
+
+window.onload = function(){document.getElementById('submit_value').innerHTML += submit_value};
+
+
+
+
 //INPUT BOXを動的に生成するプログラム
 var box_num = 3;
 var box = '<div class="block" id="block">'

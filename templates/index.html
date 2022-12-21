@@ -62,7 +62,7 @@
     <button type="button" id="prtsc_btn" class="btn-outline-inf print_hide" onclick="prtsc()">画像を保存</button>
 
     <div class="value_box">
-        <form  action="/keep_ToDo" method="POST">
+        <form id="submit_value" action="/keep_ToDo" method="POST">
             {% if session["user_id"] %}
             <button type="submit" class="btn btn-danger print_hide">保存する</button>
             {% endif %}
