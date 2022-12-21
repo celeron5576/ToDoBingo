@@ -1,5 +1,6 @@
 from flask import Flask,render_template, flash, redirect, request, session
 from flask import Flask, redirect, url_for, render_template, request, session 
+from flask_session import Session
 from datetime import timedelta 
 
 import sqlite3
@@ -14,6 +15,11 @@ app.secret_key = 'abcdefghijklmn'
 con = sqlite3.connect('TestDB.db')
 # データベース作成
 
+
+# ファイルシステムを使用するようにセッションを構成します (署名付き Cookie の代わりに)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 
 
@@ -45,8 +51,6 @@ def hello_world():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    #　ユーザーidをクリアする
-    session.clear()
     username = request.form.get("username")
     password = request.form.get("password")
     # POSTの場合
@@ -66,6 +70,8 @@ def login():
         # ユーザーネームとパスワードが正しいか確認
         if users != None:
             if users[2] == password:
+                #　ユーザーidをクリアする
+                session.clear()
                 # ユーザーを記憶する
                 session["user_id"] = users[0]
                 #メッセージ
