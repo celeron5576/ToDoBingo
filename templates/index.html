@@ -24,11 +24,12 @@
 <div id="main" class="main">
     <div class="print_hide">
         {% block main %}
+        {% if another == 1 %}
         <div class="title print_hide">
             <label for="exampleInputEmail1" class="form-label-title"></label>
             <input type="text" name="form_title" class="form-control input_title" id="InputTitle"
                 aria-describedby="emailHelp" placeholder="ToDoの題名を入力してください。 例）今年中にやりたいこと"
-                style="background-color:#eff0f3;" value="">
+                style="background-color:#eff0f3;" value="{{ title }}">
             <select class="form-select box_size" aria-label="Default select example" id="box">
                 <option selected value="3">3×3</option>
                 <option value="5">5×5</option>
@@ -41,13 +42,13 @@
     </div>
 
     <script>
-        let input = document.getElementById('InputTitle');
+        var input = document.getElementById('InputTitle');
         input.addEventListener('change', TitleChange);
         function TitleChange() {
             var title = '<h1>' + input.value + '</h1>'
             document.getElementById('title').innerHTML = title;
         }
-        const select = document.querySelector('select');
+        var select = document.querySelector('select');
         //セレクトボックスの変更でイベント発火
         select.addEventListener('change', () => {
             console.log(select)
@@ -57,48 +58,83 @@
     <div id="wrap">
         <script src="../static/js/box.js"></script>
     </div>
-
-    <button type="button" id="print_btn" class="btn-outline-inf print_hide" onclick="prints()">印刷する</button>
-    <button type="button" id="prtsc_btn" class="btn-outline-inf print_hide" onclick="prtsc()">画像を保存</button>
-
-    <div class="value_box">
-        <form id="submit_value" action="/keep_ToDo" method="POST">
-            {% if session["user_id"] %}
-            <button type="submit" class="btn btn-danger print_hide">保存する</button>
-            {% endif %}
-        </form>
+    {% else %}
+    <div class="title print_hide">
+        <label for="exampleInputEmail1" class="form-label-title"></label>
+        <input type="text" name="form_title" class="form-control input_title" id="InputTitle"
+            aria-describedby="emailHelp" placeholder="ToDoの題名を入力してください。 例）今年中にやりたいこと" style="background-color:#eff0f3;"
+            value="">
+        <select class="form-select box_size" aria-label="Default select example" id="box">
+            <option selected value="3">3×3</option>
+            <option value="5">5×5</option>
+            <option value="7">7×7</option>
+        </select>
     </div>
+</div>
+<div id="title" class="print_block">
+    <h1>No Title</h1>
+</div>
 
-    <p id="my_link" class="print_block">https://www.hogehogehoge.com</p>
+<script>
+    var input = document.getElementById('InputTitle');
+    input.addEventListener('change', TitleChange);
+    function TitleChange() {
+        var title = '<h1>' + input.value + '</h1>'
+        document.getElementById('title').innerHTML = title;
+    }
+    var select = document.querySelector('select');
+    //セレクトボックスの変更でイベント発火
+    select.addEventListener('change', () => {
+        console.log(select)
+    }, false);
+</script>
 
-    <script>
-        function prints() {
-            console.log("a");
-            window.print();
-        }
-        function prtsc() {
-            alert("スクリーンショット用ページを表示します。\n表をタップすると元のページに戻ります。")
-            var child_add_class = document.getElementById("title");
-            console.log(child_add_class)
-            var parent_add_class = child_add_class.parentElement;
-            parent_add_class.classList.add("all_btn");
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'static/css/style_prtsc.css';
-            document.head.appendChild(link);
+<div id="wrap">
+    <script src="../static/js/box.js"></script>
+</div>
+{% endif %}
+
+<button type="button" id="print_btn" class="btn-outline-inf print_hide" onclick="prints()">印刷する</button>
+<button type="button" id="prtsc_btn" class="btn-outline-inf print_hide" onclick="prtsc()">画像を保存</button>
+
+<div class="value_box">
+    {% if session["user_id"] %}
+    <form id="submit_value" action="/keep_ToDo" method="POST">
+        <button type="submit" class="btn btn-danger print_hide">保存する</button>
+    </form>
+    {% endif %}
+</div>
+
+<p id="my_link" class="print_block">https://www.hogehogehoge.com</p>
+
+<script>
+    function prints() {
+        console.log("a");
+        window.print();
+    }
+    function prtsc() {
+        alert("スクリーンショット用ページを表示します。\n表をタップすると元のページに戻ります。")
+        var child_add_class = document.getElementById("title");
+        console.log(child_add_class)
+        var parent_add_class = child_add_class.parentElement;
+        parent_add_class.classList.add("all_btn");
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'static/css/style_prtsc.css';
+        document.head.appendChild(link);
 
 
-            document.getElementById('wrap').addEventListener('click', function () {
-                var linkElements = document.getElementsByTagName('link');
-                for (var i = 0; i < linkElements.length; i++) {
-                    var linkElement = linkElements[i];
-                    if (linkElement.getAttribute('href') === 'static/css/style_prtsc.css') {
-                        linkElement.parentNode.removeChild(linkElement);
-                    }
+        document.getElementById('wrap').addEventListener('click', function () {
+            var linkElements = document.getElementsByTagName('link');
+            for (var i = 0; i < linkElements.length; i++) {
+                var linkElement = linkElements[i];
+                if (linkElement.getAttribute('href') === 'static/css/style_prtsc.css') {
+                    linkElement.parentNode.removeChild(linkElement);
                 }
-            });
-        }
-    </script>
-    {% endblock %}
-    <script src="../static/js/font-size.js"></script>
+            }
+        });
+    }
+</script>
+{% endblock %}
+<script src="../static/js/font-size.js"></script>
 </div>

@@ -16,12 +16,11 @@ for (let x = 0; x < box_num * box_num; x++) {
 
 submit_value = '<input id="input_box_value-2" class="input_box hide" type="text" value="9" name="box_size">'
 submit_value += '<input id="input_box_title" class="input_box hide" type="text" name="box_title">'
-
 for (let x = 0; x < 9; x++) {
-    if (x != 5) {
+    if (x != 4) {
         submit_value += '<input id="input_box_value' + x + '" class="input_box hide"type="text" name="box_value' + x + '">'
     }else{
-        submit_value += '<input id="input_box_value' + x + '" class="input_box hide"type="text" value="free" name="box_value5">'
+        submit_value += '<input id="input_box_value' + x + '" class="input_box hide"type="text" value="free" name="box_value4">'
     }
 }
 
@@ -110,6 +109,22 @@ function valueChange() {
     + '</div>';
     document.getElementById('wrap').innerHTML = box;
     change_observer();
+
+
+    submit_value = '<input id="input_box_value-2" class="input_box hide" type="text" value="' + (box_num * box_num) + '" name="box_size">'
+                 + '<input id="input_box_title" class="input_box hide" type="text" name="box_title">'
+    for (let x = 0; x < (box_num * box_num); x++) {
+        if (x != (box_num * box_num + 1) / 2 - 1) {
+            submit_value += '<input id="input_box_value' + x + '" class="input_box hide"type="text" name="box_value' + x + '">'
+        }else{
+            submit_value += '<input id="input_box_value' + x + '" class="input_box hide"type="text" value="free" name="box_value' + x + '">'
+        }
+    }
+    submit_value += '<button type="submit" class="btn btn-danger print_hide">保存する</button>'
+
+    console.log(submit_value);
+    document.getElementById('submit_value').innerHTML = submit_value;
+    //window.onload = function(){document.getElementById('submit_value').innerHTML = submit_value};
 }
 let boxSelect = document.getElementById('box');
 boxSelect.addEventListener('change', valueChange);
@@ -152,6 +167,8 @@ for (var i = 0; i < box_num * box_num; i++) {
                 document.getElementById("box_" + this.id).innerHTML = inputted_box;
                 //console.log(this);
             }
+            let change_submit_value = document.getElementById(`input_box_value` + lastChar);
+            change_submit_value.value = this.value;
         });
     }
 }
@@ -184,8 +201,8 @@ function input_change() {
     for (var i = 0; i < box_num * box_num; i++) {
         //let boxInput = document.getElementById(box_ids[i]);
         //boxInput.addEventListener('change', function () {
-        console.log(`id:${this.id}`);
-        console.log(`value:${this.value}`);
+        //console.log(`id:${this.id}`);
+        //console.log(`value:${this.value}`);
         var lastChar = this.id.slice(9, this.id.length);
         if (this.value != "") {
             inputted_box = '<button type="button" id="' + this.value + '" value="' + this.id + '" class="print_hide inputted_box inputted" onclick="buttonClick(this.value ,this.id)">'
@@ -193,13 +210,15 @@ function input_change() {
                 + '</button>'
                 + '<p class="inputted_text">' + this.value + '</p>'
 
-            console.log("a");
-            console.log(inputted_box);
-            console.log(`数：${lastChar}`)
-            console.log(`box_${lastChar}`)
-            console.log(document.getElementById(`box_${lastChar}`))
-            document.getElementById(`box_${lastChar}`).innerHTML = inputted_box;
-            console.log(this);
+            //console.log("a");
+            //console.log(inputted_box);
+            //console.log(`数：${lastChar}`)
+            //console.log(`box_${lastChar}`)
+            //console.log(document.getElementById(`box_${lastChar}`))
+            //document.getElementById(`box_${lastChar}`).innerHTML = inputted_box;
+            //console.log(this);
+            let change_submit_value = document.getElementById(`input_box_value` + lastChar);
+            change_submit_value.setAttribute("value", this.value);
         }
         //});
     }

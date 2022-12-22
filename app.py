@@ -49,7 +49,7 @@ def apology(message, code=400):
 ###################################################################################
 @app.route('/')
 def hello_world():
-    return render_template("index.html")
+    return render_template("index.html" ,another = 0)
 
 
 ###################################################################################
@@ -175,13 +175,20 @@ def keep():
 ###################################################################################
 @app.route("/keep_ToDo" ,methods=["GET" ,"POST"])
 def keep_todo():
-    a = request.form["box_title"]
-    b = request.form["box_value0"]
-    b = request.form["box_value5"]
-    print(a)
-    print(b)
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    return redirect("/")
+    title = request.form["box_title"]
+    box_size = int(request.form["box_size"])
+    box_value = []
+
+    title = "dfjkals;"
+
+    for i in range(box_size):
+        value_temp = request.form.get("box_value" + str(i))
+        box_value.append(value_temp)
+
+    print(box_value)
+
+
+    return render_template("index.html" ,another=1 ,title=title)
 
 
 if __name__ == "__main__":
