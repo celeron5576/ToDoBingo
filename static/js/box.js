@@ -230,7 +230,7 @@ var inputChange = document.getElementsByClassName('input_box');
 
 title = document.getElementById("InputTitle")
 title.addEventListener("change", function(){
-    var title_value = document.getElementById("input_box_value-2")
+    var title_value = document.getElementById("input_box_title")
     title_value.setAttribute("value", this.value);
 }, false);
 

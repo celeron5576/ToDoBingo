@@ -1,4 +1,3 @@
-
 #ユーザーテーブル
 # id: 主キー　連番
 # email: メールアドレス　NOT NULL
@@ -26,7 +25,8 @@ con.execute(
         description STRING, 
         date INTEGER,
         contribution_id INTEGER,
-        like_num INTEGER
+        like_num INTEGER,
+        set_main INTEGER
         );
         """)
 

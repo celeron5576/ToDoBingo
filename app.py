@@ -179,12 +179,13 @@ def keep_todo():
     box_size = int(request.form["box_size"])
     box_value = []
 
-    title = "dfjkals;"
 
     for i in range(box_size):
         value_temp = request.form.get("box_value" + str(i))
         box_value.append(value_temp)
 
+    print(title)
+    print(box_size)
     print(box_value)
 
 
