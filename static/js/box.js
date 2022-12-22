@@ -227,6 +227,14 @@ function input_change() {
 
 var inputChange = document.getElementsByClassName('input_box');
 
+
+title = document.getElementById("InputTitle")
+title.addEventListener("change", function(){
+    var title_value = document.getElementById("input_box_value-2")
+    title_value.setAttribute("value", this.value);
+}, false);
+
+
 function change_observer() {
     ChangeFontsize();
     for (var i = 0; i < inputChange.length; i++) {
