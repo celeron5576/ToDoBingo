@@ -215,7 +215,7 @@ function input_change() {
             //console.log(`数：${lastChar}`)
             //console.log(`box_${lastChar}`)
             //console.log(document.getElementById(`box_${lastChar}`))
-            //document.getElementById(`box_${lastChar}`).innerHTML = inputted_box;
+            document.getElementById(`box_${lastChar}`).innerHTML = inputted_box;
             //console.log(this);
             let change_submit_value = document.getElementById(`input_box_value` + lastChar);
             change_submit_value.setAttribute("value", this.value);
