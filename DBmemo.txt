@@ -22,6 +22,7 @@ con.execute(
     """CREATE TABLE ToDos(
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
         title STRING, 
+        box_size INTEGER,
         description STRING, 
         date INTEGER,
         contribution_id INTEGER,

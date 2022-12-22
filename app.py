@@ -1,6 +1,7 @@
 from flask import Flask,render_template, flash, redirect, url_for, request, session
 from flask_session import Session
 from datetime import timedelta 
+import time
 
 import sqlite3
 
@@ -13,7 +14,6 @@ app.secret_key = '54UKAMWiZw'
 
 con = sqlite3.connect('TestDB.db')
 # データベース作成
-
 
 # ファイルシステムを使用するようにセッションを構成します (署名付き Cookie の代わりに)
 app.config["SESSION_PERMANENT"] = False
@@ -178,15 +178,35 @@ def keep_todo():
     title = request.form["box_title"]
     box_size = int(request.form["box_size"])
     box_value = []
-
+    box_value1 = ""
 
     for i in range(box_size):
         value_temp = request.form.get("box_value" + str(i))
         box_value.append(value_temp)
+    
+    for m in box_value:
+        box_value1 += m
+        box_value1 += "`!z(}"
+
+    box_value1 = box_value1[:5]
+    user_id = session["user_id"]
+    date = time.time()
+
+    #もし初めて保存するならlike_numを0に、初めてじゃないならupdateにしたい
+    like_num = 0
 
     print(title)
     print(box_size)
     print(box_value)
+    print(box_value1)
+
+    con.execute("""
+    INSERT INTO tenants 
+    (title, box_size, description ,date ,contribution_id ,like_num ,set_main) 
+    VALUES(?, ?, ?, ?, ?, ?, ?)""", 
+    (title, box_size, box_value1 ,date ,user_id ,like_num ,1))
+
+
 
 
     return render_template("index.html" ,another=1 ,title=title)
