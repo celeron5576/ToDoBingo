@@ -12,7 +12,7 @@ app.secret_key = '54UKAMWiZw'
 #app.permanent_session_lifetime = timedelta(minutes=3) 
 
 
-con = sqlite3.connect('TestDB.db')
+con = sqlite3.connect('TestDB.db', check_same_thread=False)
 # データベース作成
 
 # ファイルシステムを使用するようにセッションを構成します (署名付き Cookie の代わりに)
@@ -188,7 +188,7 @@ def keep_todo():
         box_value1 += m
         box_value1 += "`!z(}"
 
-    box_value1 = box_value1[:5]
+    box_value1 = box_value1[:-5]
     user_id = session["user_id"]
     date = time.time()
 
@@ -200,13 +200,28 @@ def keep_todo():
     print(box_value)
     print(box_value1)
 
-    con.execute("""
-    INSERT INTO tenants 
-    (title, box_size, description ,date ,contribution_id ,like_num ,set_main) 
-    VALUES(?, ?, ?, ?, ?, ?, ?)""", 
-    (title, box_size, box_value1 ,date ,user_id ,like_num ,1))
 
+    # データベースにユーザーが保存したデータがあるか調べてる
+    db = con.cursor()
+    db.execute("SELECT * FROM ToDos where contribution_id=? AND set_main=?", (user_id, 1))
+    main_todo = db.fetchone()
 
+    # データがあったらどうするかの処理
+    # データを更新
+    if main_todo != None:
+        db = con.cursor()
+        db.execute("UPDATE ToDos SET description=?, date=?, title=? WHERE contribution_id=? AND set_main=?", (box_value1, date, title, user_id, 1))
+        con.commit()
+    # 新規
+    # 新しくデータを作成
+    else:
+        db = con.cursor()
+        db.execute("INSERT INTO ToDos (title, box_size, description, date, contribution_id, like_num, set_main) VALUES (?, ?, ?, ?, ?, ?, ?)", (title, int(box_size), box_value1, int(date), int(user_id), like_num, 1))
+        con.commit()
+
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print(main_todo)
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 
     return render_template("index.html" ,another=1 ,title=title)
